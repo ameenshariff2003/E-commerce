@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
-const users = require('./routes/useRoutes')
+const usersRoute = require('./routes/useRoutes')
+const categoryRoute = require('./routes/catogeryRoutes')
 const cookieParser = require('cookie-parser');
+
 
 
 const Port = process.env.PORT;
@@ -41,7 +43,16 @@ app.get('/users', (req, res) => {
 
 
 //routes
-app.use('/users',users);
+app.use('/users',usersRoute);
+app.use('/api',categoryRoute)
+
+
+
+
+
+
+
+
 
 app.listen(Port, () => {
     console.log(`Server is running on port ${Port}`);

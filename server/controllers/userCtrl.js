@@ -15,7 +15,7 @@ const userCtrl = {
             }
             
             if(password.length<6){
-                return res.status(400).json({msg:"Password length shouls be minimum 6 "})
+                return res.status(400).json({msg:"Password length should be minimum 6 "})
             }
             const hashPassword = await bcrypt.hash(password,10);
 
@@ -24,7 +24,7 @@ const userCtrl = {
             //saving in db
 
             await newUser.save()
-            .then(()=>{console.log(`successfully saved`)})
+            .then(()=>{console.log(`successfully Registered`)})
             .catch((err)=>{console.log(err)})
 
             //jwt to authentication
@@ -112,6 +112,21 @@ const userCtrl = {
 
         }
 
+    },
+    getUser:async(req,res)=>{
+        try{
+            const user = await Users.findById(req.user.id).select('-password')
+            // select('-password') is used hear to show all the user data execpet password
+
+            if(!user){
+                return res.status(400).json({msg:'user not found'})
+            }
+            res.json(user)
+
+        }
+        catch(err){
+
+        }
     }
 }
 
