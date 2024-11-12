@@ -5,6 +5,7 @@ require('dotenv').config();
 const usersRoute = require('./routes/useRoutes')
 const categoryRoute = require('./routes/catogeryRoutes')
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload')
 
 
 
@@ -29,6 +30,9 @@ const main =()=>{
  //middelwares
  app.use(express.json())
  app.use(cookieParser());
+ app.use(fileUpload({
+    useTempFiles:true
+ }))
 
  
 
